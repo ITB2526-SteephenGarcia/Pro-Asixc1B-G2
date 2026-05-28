@@ -982,162 +982,6 @@ El archivo configura el Zabbix Agent para recopilar métricas de rendimiento com
 
 ![Imagen 77](images/image_77.png)
 
-# Parte De Base de Datos
-
-# Server BBDD
-
-Creación de la base de datos con mysql (mariadb):
-Instalaremos los paquetes necesarios para poder utilizar mariadb en el servidor:
-
-![Imagen 78](images/image_78.png)
-
-
-![Imagen 79](images/image_79.png)
-
-Una vez creado, crearemos el script sql para generar las tablas:
-
-![Imagen 80](images/image_80.png)
-
-
-![Imagen 81](images/image_81.png)
-
-
-![Imagen 82](images/image_82.png)
-
-Ahora proseguimos con la creación de los 4 roles con sus permisos:
-
-![Imagen 83](images/image_83.png)
-
-Asignaremos permisos a cada rol:
-
-![Imagen 84](images/image_84.png)
-
-Verificamos que los roles existen:
-
-![Imagen 85](images/image_85.png)
-
-Ahora crearemos el script:
-
-![Imagen 86](images/image_86.png)
-
-Le asignamos permisos y ejecutamos el script:
-
-![Imagen 87](images/image_87.png)
-
-Iremos creando cada usuario paso a paso asignándole su rol correspondiente. Y quedaría tal que así:
-
-![Imagen 88](images/image_88.png)
-
-Continuamos con los triggers:
-Trigger para bloqueo de usuarios para llamadas:
-
-![Imagen 89](images/image_89.png)
-
-
-![Imagen 90](images/image_90.png)
-
-Seguimos con el segundo trigger, control de cuota de minutos mensuales:
-
-![Imagen 91](images/image_91.png)
-
-Ahora con el tercero Control de llamadas diarias máximas:
-
-![Imagen 92](images/image_92.png)
-
-Ahora el cuarto Auditoría de accesos no autorizados:
-
-![Imagen 93](images/image_93.png)
-
-Ahora el quinto:
-El trigger 5 controla que el rol administración no pueda insertar llamadas (acceso al sistema de video trucadas de clientes), y si lo intenta lo registra en tabla avisos.
-
-![Imagen 94](images/image_94.png)
-
-Ejecutamos el comando SHOW TRIGGERSS\G y salen los 5 triggers que hemos creado.
-Para hacer el event periodic de backup hay que activar el scheduler de event en MariaDB:
-
-![Imagen 95](images/image_95.png)
-
-Luego creamos el event:
-
-![Imagen 96](images/image_96.png)
-
-
-![Imagen 97](images/image_97.png)
-
-Conexión a la base de de datos desde otra estancia:
-Crearemos un usuario para ello:
-Para ello nos dirigimos al servidor web e instalamos mysql cliente:
-
-![Imagen 98](images/image_98.png)
-
-Una vez instalado nos dirigimos al servidor de base de datos y crearemos un usuario para que pueda remotamente desde cualquier server.
-
-![Imagen 99](images/image_99.png)
-
-
-![Imagen 100](images/image_100.png)
-
-
-![Imagen 101](images/image_101.png)
-
-Ahora nos dirigimos al apartado del security group de mi instancia y abrimos el inbound con puerto 3306 en protocolo TCP.
-
-![Imagen 102](images/image_102.png)
-
-En nuestro servidor de base de datos hacemos la siguiente configuración para que escuche en todas las interfaces y no solo en localhost.
-Cambiamos 127.0.0.1 a 0.0.0.0
-
-![Imagen 103](images/image_103.png)
-
-
-![Imagen 104](images/image_104.png)
-
-
-![Imagen 105](images/image_105.png)
-
-
-![Imagen 106](images/image_106.png)
-
-Ahora procedemos a la creación del bot de telegram.
-Buscamos BotFather en la aplicación de telegram e introducimos /start
-vemos las opciones y ponemos el parámetro /newbot
-introducimos el nombre del bot y luego el nombre de usuario
-Como podemos observar, BotFather nos ha gnerado un TOKEN. Deberíamos buscar en telegram el nombre de nuestro bot e introducir el parámetro /start
-BUscamos el enlace que nos proporcionó BotFather sustituyendo el TOKEN y veremos como se nos generó un JSON .
-
-![Imagen 107](images/image_107.png)
-
-Podemos observar como nos ha salido un ID {“id”:8259012916”}.
-Nos dirigimos al servidor de base de datos y crearemos un script de alertas, que de eso se basa el bot de telegram:
-
-![Imagen 108](images/image_108.png)
-
-
-![Imagen 109](images/image_109.png)
-
-
-![Imagen 110](images/image_110.png)
-
-Instalamos curl:
-
-![Imagen 111](images/image_111.png)
-
-Ejecutamos el script:
-
-![Imagen 112](images/image_112.png)
-
-Configuramos el cron para que se ejecute cada 5 minutos:
-
-![Imagen 113](images/image_113.png)
-
-Pondremos a prueba y mandaremos un aviso en la base de datos de mariadb:
-
-![Imagen 114](images/image_114.png)
-
-
-![Imagen 115](images/image_115.png)
-
 # SERVER LDAP
 configuracion slapd
 
@@ -1518,6 +1362,162 @@ Aunque el rendimiento actual roza la perfección, propongo estas tres mejoras pa
 1. Limitar el bitrate en Jellyfin: Configurar un tope de 10 Mbps por usuario para evitar que la transcodificación de usuarios con mala conexión fatigue la CPU de mi máquina.
 1. Implementar QoS (Quality of Service): Priorizar el tráfico de la radio en directo y la videoconferencia por delante de las descargas web estándar de Nginx.
 1. Monitorizar el tráfico saliente: Instalar herramientas como vnstat para controlar el volumen de datos consumidos y evitar sorpresas o sobrecostes en la facturación de AWS.
+
+# Parte De Base de Datos
+
+# Server BBDD
+
+Creación de la base de datos con mysql (mariadb):
+Instalaremos los paquetes necesarios para poder utilizar mariadb en el servidor:
+
+![Imagen 78](images/image_78.png)
+
+
+![Imagen 79](images/image_79.png)
+
+Una vez creado, crearemos el script sql para generar las tablas:
+
+![Imagen 80](images/image_80.png)
+
+
+![Imagen 81](images/image_81.png)
+
+
+![Imagen 82](images/image_82.png)
+
+Ahora proseguimos con la creación de los 4 roles con sus permisos:
+
+![Imagen 83](images/image_83.png)
+
+Asignaremos permisos a cada rol:
+
+![Imagen 84](images/image_84.png)
+
+Verificamos que los roles existen:
+
+![Imagen 85](images/image_85.png)
+
+Ahora crearemos el script:
+
+![Imagen 86](images/image_86.png)
+
+Le asignamos permisos y ejecutamos el script:
+
+![Imagen 87](images/image_87.png)
+
+Iremos creando cada usuario paso a paso asignándole su rol correspondiente. Y quedaría tal que así:
+
+![Imagen 88](images/image_88.png)
+
+Continuamos con los triggers:
+Trigger para bloqueo de usuarios para llamadas:
+
+![Imagen 89](images/image_89.png)
+
+
+![Imagen 90](images/image_90.png)
+
+Seguimos con el segundo trigger, control de cuota de minutos mensuales:
+
+![Imagen 91](images/image_91.png)
+
+Ahora con el tercero Control de llamadas diarias máximas:
+
+![Imagen 92](images/image_92.png)
+
+Ahora el cuarto Auditoría de accesos no autorizados:
+
+![Imagen 93](images/image_93.png)
+
+Ahora el quinto:
+El trigger 5 controla que el rol administración no pueda insertar llamadas (acceso al sistema de video trucadas de clientes), y si lo intenta lo registra en tabla avisos.
+
+![Imagen 94](images/image_94.png)
+
+Ejecutamos el comando SHOW TRIGGERSS\G y salen los 5 triggers que hemos creado.
+Para hacer el event periodic de backup hay que activar el scheduler de event en MariaDB:
+
+![Imagen 95](images/image_95.png)
+
+Luego creamos el event:
+
+![Imagen 96](images/image_96.png)
+
+
+![Imagen 97](images/image_97.png)
+
+Conexión a la base de de datos desde otra estancia:
+Crearemos un usuario para ello:
+Para ello nos dirigimos al servidor web e instalamos mysql cliente:
+
+![Imagen 98](images/image_98.png)
+
+Una vez instalado nos dirigimos al servidor de base de datos y crearemos un usuario para que pueda remotamente desde cualquier server.
+
+![Imagen 99](images/image_99.png)
+
+
+![Imagen 100](images/image_100.png)
+
+
+![Imagen 101](images/image_101.png)
+
+Ahora nos dirigimos al apartado del security group de mi instancia y abrimos el inbound con puerto 3306 en protocolo TCP.
+
+![Imagen 102](images/image_102.png)
+
+En nuestro servidor de base de datos hacemos la siguiente configuración para que escuche en todas las interfaces y no solo en localhost.
+Cambiamos 127.0.0.1 a 0.0.0.0
+
+![Imagen 103](images/image_103.png)
+
+
+![Imagen 104](images/image_104.png)
+
+
+![Imagen 105](images/image_105.png)
+
+
+![Imagen 106](images/image_106.png)
+
+Ahora procedemos a la creación del bot de telegram.
+Buscamos BotFather en la aplicación de telegram e introducimos /start
+vemos las opciones y ponemos el parámetro /newbot
+introducimos el nombre del bot y luego el nombre de usuario
+Como podemos observar, BotFather nos ha gnerado un TOKEN. Deberíamos buscar en telegram el nombre de nuestro bot e introducir el parámetro /start
+BUscamos el enlace que nos proporcionó BotFather sustituyendo el TOKEN y veremos como se nos generó un JSON .
+
+![Imagen 107](images/image_107.png)
+
+Podemos observar como nos ha salido un ID {“id”:8259012916”}.
+Nos dirigimos al servidor de base de datos y crearemos un script de alertas, que de eso se basa el bot de telegram:
+
+![Imagen 108](images/image_108.png)
+
+
+![Imagen 109](images/image_109.png)
+
+
+![Imagen 110](images/image_110.png)
+
+Instalamos curl:
+
+![Imagen 111](images/image_111.png)
+
+Ejecutamos el script:
+
+![Imagen 112](images/image_112.png)
+
+Configuramos el cron para que se ejecute cada 5 minutos:
+
+![Imagen 113](images/image_113.png)
+
+Pondremos a prueba y mandaremos un aviso en la base de datos de mariadb:
+
+![Imagen 114](images/image_114.png)
+
+
+![Imagen 115](images/image_115.png)
 
 # Video final de demostracion
 
