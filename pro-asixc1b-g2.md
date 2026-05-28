@@ -346,7 +346,9 @@ Zabbix instalado en el SRV-06 para monitorizar:
 | Señalética | Señales de: riesgo eléctrico, riesgo de fuego (extinción por gas), EPI obligatorio, salida de emergencia, prohibido comer. Todas en castellano y pictograma ISO 7010. |
 
 
-Implementació del CPD al núvol AWS
+## Implementació del CPD al núvol AWS
+
+### Creacion de los servers mediante ansible en AWS
 
 ![Imagen 6](images/image_6.png)
 
