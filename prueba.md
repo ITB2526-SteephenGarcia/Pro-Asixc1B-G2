@@ -1,4 +1,4 @@
-## Propsta de CPD 
+## Proposta de CPD 
 
 
 ## 1. Ubicacion física
