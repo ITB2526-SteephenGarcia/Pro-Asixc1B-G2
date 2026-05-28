@@ -1342,7 +1342,9 @@ comando final para el arranque
 
 ![Imagen 167](images/image_167.png)
 
-http:
+http:34.205.94.36/radio.html
+
+
 ## Implantació del Servei de Vídeo (Jellyfin)
 Descarga de crt:
 
@@ -1413,6 +1415,9 @@ ls para saber si esta, pasar el video a mp4 y dar permisos en la carpeta
 
 ![Imagen 186](images/image_186.png)
 
+entrada en la web para el server de videos http://34.205.94.36:8096
+
+
 ## Funcion del server de video
 
 El servei s'implementa sota el model de Vídeo sota Demanda (VoD - Video on Demand), on els usuaris poden reproduir els continguts allotjats al servidor en qualsevol moment. Per garantir una reproducció fluida sense necessitat de descarregar el fitxer complet prèviament, s'utilitza el protocol de streaming HLS (HTTP Live Streaming):
@@ -1440,7 +1445,7 @@ Crear la interfaz web de la videoconferencia
 
 ![Imagen 191](images/image_191.png)
 
-Permitir que confien en mi ip: http://34.205.94.36:8096
+Permitir que confien en mi ip: http://34.205.94.36
 
 ![Imagen 187](images/image_187.png)
 
@@ -1450,7 +1455,7 @@ Iniciamos streaming
 
 ![Imagen 193](images/image_193.png)
 
-http://34.205.94.36
+entrada para jitsi meet http://34.205.94.36
 
 ## Protocolo WebRTC
 
