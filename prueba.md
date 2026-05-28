@@ -486,7 +486,7 @@ Diseño currado de la web
 
 ![Imagen 43](images/image_43.png)
 
-<?php
+```php
 session_start();
 // --- CONFIGURACIÓN DE INFRAESTRUCTURA REAL (INNOVATE TECH) ---
 define('LDAP_SERVER', '172.31.16.181');
@@ -842,7 +842,10 @@ window.open('http://34.205.94.36/index.html', '_blank');
 </footer>
 </body>
 </html>
-Diseño Final Web
+
+```
+#### Diseño Final Web
+
 Se autetifica mediante ldap o no entras
 
 ![Imagen 44](images/image_44.png)
