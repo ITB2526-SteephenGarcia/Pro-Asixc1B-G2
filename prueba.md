@@ -479,7 +479,7 @@ Comprovacion del funcionamiento de sftp : sftp -P 2222 clienteweb@54.235.232.168
 
 ![Imagen 41](images/image_41.png)
 
-Diseño currado de la web
+Diseño de la web
 
 ![Imagen 42](images/image_42.png)
 
@@ -846,7 +846,7 @@ window.open('http://34.205.94.36/index.html', '_blank');
 ```
 #### Diseño Final Web
 
-Se autetifica mediante ldap o no entras
+Se autetifica mediante ldap
 
 ![Imagen 44](images/image_44.png)
 
@@ -926,11 +926,11 @@ Carpeta utilizada y restart del server
 
 Comprobación de la conexión con ldap
 
-nc -zv 172.31.16.181 389: Comprueba la conectividad por red con el servidor LDAP del mi compañero. El mensaje succeeded! confirma que el puerto 389 (LDAP) está abierto y tu máquina se comunica con la suya sin bloqueos.
+nc -zv 172.31.16.181 389: Comprueba la conectividad por red con el servidor LDAP de mi compañero. El mensaje succeeded! confirma que el puerto 389 (LDAP) está abierto y la máquina se comunica con la suya sin bloqueos.
 
 ![Imagen 65](images/image_65.png)
 
-Verifica que la integración con LDAP funciona. Busca al usuario clienteweb tanto en los archivos locales como en el servidor remoto de LDAP y, al devolver su línea de información (UID, carpeta home, shell /bin/false), demuestra que el servidor ya lee correctamente los usuarios creados por tu compañero.
+Verifica que la integración con LDAP funciona. Busca al usuario clienteweb tanto en los archivos locales como en el servidor remoto de LDAP y, al devolver su línea de información (UID, carpeta home, shell /bin/false), demuestra que el servidor ya lee correctamente los usuarios creados por mi compañero.
 
 ![Imagen 66](images/image_66.png)
 
@@ -943,7 +943,7 @@ ldapserach hacia la ip privada de mi compañero y el usuario clienteweb que creo
 
 #### Conexion Server web + Sftp con BBDD
 
-Mi compañero que administra aws debe de activar el puerto de la base de datos 3306 TCP que pertenece a mariadb. Luego mi compañero cambia la carpeta sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf y poner:
+La persona que administra aws debe de activar el puerto de la base de datos 3306 TCP que pertenece a mariadb. Luego el encargado de BBDD cambia la carpeta sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf y poner:
 
 bind-address = 0.0.0.0
 
