@@ -1514,3 +1514,8 @@ Aunque el rendimiento actual roza la perfección, propongo estas tres mejoras pa
 1. Limitar el bitrate en Jellyfin: Configurar un tope de 10 Mbps por usuario para evitar que la transcodificación de usuarios con mala conexión fatigue la CPU de mi máquina.
 1. Implementar QoS (Quality of Service): Priorizar el tráfico de la radio en directo y la videoconferencia por delante de las descargas web estándar de Nginx.
 1. Monitorizar el tráfico saliente: Instalar herramientas como vnstat para controlar el volumen de datos consumidos y evitar sorpresas o sobrecostes en la facturación de AWS.
+
+# Video final de demostracion
+
+[3min.webm](https://github.com/user-attachments/assets/1d1a60a0-cbb0-402c-9de3-d3f6783dbe71)
+
