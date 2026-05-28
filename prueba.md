@@ -362,7 +362,7 @@ Implementació del CPD al núvol AWS
 
 ![Imagen 10](images/image_10.png)
 
-LOGS:
+# Server LOGS
 Pasos previs:
 
 ![Imagen 11](images/image_11.png)
@@ -409,7 +409,7 @@ Instalació client LDAP
 
 ![Imagen 23](images/image_23.png)
 
-SERVER WEB + SFTP
+# SERVER WEB + SFTP
 Crear el usuario admin_innovate para no usar el default (root)
 
 ![Imagen 24](images/image_24.png)
@@ -982,6 +982,8 @@ El archivo configura el Zabbix Agent para recopilar métricas de rendimiento com
 
 ![Imagen 77](images/image_77.png)
 
+# Server BBDD
+
 Creación de la base de datos con mysql (mariadb):
 Instalaremos los paquetes necesarios para poder utilizar mariadb en el servidor:
 
@@ -1123,7 +1125,7 @@ Ejecutamos el script:
 
 ![Imagen 112](images/image_112.png)
 
-COnfiguramos el cron para que se ejecute cada 5 minutos:
+Configuramos el cron para que se ejecute cada 5 minutos:
 
 ![Imagen 113](images/image_113.png)
 
@@ -1134,7 +1136,7 @@ Pondremos a prueba y mandaremos un aviso en la base de datos de mariadb:
 
 ![Imagen 115](images/image_115.png)
 
-SERVER LDAP
+# SERVER LDAP
 configuracion slapd
 
 ![Imagen 116](images/image_116.png)
@@ -1158,7 +1160,7 @@ Comprovacio i implamantacio en la base de dades de LDAP
 
 ![Imagen 121](images/image_121.png)
 
-SERVER BACKUP i Monitoratge:
+# SERVER BACKUP i Monitoratge
 Instalació zabbix:
 
 ![Imagen 122](images/image_122.png)
@@ -1224,7 +1226,7 @@ Server=172.31.15.83 ServerActive=172.31.15.83 Hostname=SRV-LOGS
 
 ![Imagen 139](images/image_139.png)
 
-Server audio y vídeo
+# Server audio,vídeo y streaming
 PubkeyAuthentication yes: Activé esta directiva para permitir que los usuarios puedan iniciar sesión de forma segura utilizando llaves públicas SSH.
 PasswordAuthentication no: Desactivé el acceso por contraseña tradicional para blindar mi servidor contra ataques de fuerza bruta, obligando a usar únicamente llaves criptográficas.
 PermitRootLogin no: Prohibí el inicio de sesión directo al usuario administrador (root) por motivos de seguridad, forzando a entrar primero con un usuario normal.
@@ -1237,7 +1239,7 @@ PermitRootLogin no: Prohibí el inicio de sesión directo al usuario administrad
 
 ![Imagen 142](images/image_142.png)
 
-Instalación de Icecast2 (El Servidor)
+## Instalación de Icecast2 (El Servidor de audio)
 sudo apt install icecast2  ices2 -y
 
 ![Imagen 143](images/image_143.png)
@@ -1256,28 +1258,8 @@ Descarga de la herramienta FFmpeg que pondra la musica en bucle
 ![Imagen 147](images/image_147.png)
 
 
-## 
 
-
-## 
-
-
-## 
-
-
-## 
-
-
-## 
-
-
-## 
-
-
-## 
-
-
-## PASO 2: Configurar y Encender el Servicio
+### Configurar y Encender el Servicio
 
 Se abre el archivo de ciclo de vida:
 sudo nano /etc/default/icecast2
@@ -1297,7 +1279,7 @@ Se descarga un archivo de audio OGG de prueba
 
 ![Imagen 151](images/image_151.png)
 
-Generar la lista de reproducción
+Se genera la lista de reproducción
 
 ![Imagen 152](images/image_152.png)
 
@@ -1313,6 +1295,9 @@ Crear una carpeta y meter una canción de prueba
 ![Imagen 155](images/image_155.png)
 
 Desde la web ahora sale el canal radio.mp3
+
+![Imagen 194](images/image_194.png)
+
 Entrando al canal sale el audio
 
 ![Imagen 156](images/image_156.png)
@@ -1358,7 +1343,7 @@ comando final para el arranque
 ![Imagen 167](images/image_167.png)
 
 http:
-Implantació del Servei de Vídeo (Jellyfin)
+## Implantació del Servei de Vídeo (Jellyfin)
 Descarga de crt:
 
 ![Imagen 168](images/image_168.png)
@@ -1390,29 +1375,6 @@ Añadir biblioteca de medios
 
 ![Imagen 175](images/image_175.png)
 
-El servei s'implementa sota el model de Vídeo sota Demanda (VoD - Video on Demand), on els usuaris poden reproduir els continguts allotjats al servidor en qualsevol moment. Per garantir una reproducció fluida sense necessitat de descarregar el fitxer complet prèviament, s'utilitza el protocol de streaming HLS (HTTP Live Streaming):
-* Trocejament del contingut: El servidor agafa el fitxer de vídeo original (en format MP4 codificat amb el còdec H.264) i el divideix en petits fragments de pocs segons (fitxers .ts).
-* Índex de reproducció: Es genera un fitxer d'índex o llista de reproducció (extensió .m3u8) que indica al client l'ordre d'aquests fragments.
-* Transmissió via HTTP: El client (navegador web Firefox) va sol·licitant i descarregant aquests fragments de forma seqüencial a través del port web estàndard (8096 en Jellyfin). Això evita bloquejos de tallafocs i permet la reproducció instantània.
-Per a la nostra corporació, aquest servei és una eina clau per a:
-1. Formació corporativa: Allotjar cursos, seminaris tècnics i videotutorials per als nous empleats, centralitzant el coneixement de l'empresa.
-1. Comunicació interna: Distribuir comunicats oficials de la direcció, presentacions de resultats o esdeveniments corporatius a tota la plantilla de forma unificada.
-1. Estalvi de recursos: En reproduir per streaming, s'evita la saturació d'emmagatzematge als equips locals dels treballadors.
-1. 
-Descripció de protocols de videoconferència (WebRTC)
-Tecnologia de codi obert que permet la comunicació d'àudio, vídeo i dades en temps real directament entre navegadors i mòbils.
-* Sense connectors (plugins): Funciona de manera nativa mitjançant les APIs dels navegadors moderns (Firefox, Chrome), sense necessitat d'instal·lar cap programari addicional.
-
-###  Canals segurs P2P (Peer-to-Peer)
-
-* Connexió directa: El flux de dades viatja directament d'un usuari a un altre sense passar pel servidor central d'AWS, reduint dràsticament la càrrega de la infraestructura.
-* Seguretat obligatòria: Totes les transmissions estan xifrades de extrem a extrem mitjançant els protocols DTLS i SRTP, garantint la confidencialitat.
-
-###  Còdecs d'alta eficiència
-
-Optimitzen la qualitat i redueixen el consum d'amplada de banda amb baixa latència:
-* Àudio (Opus): Estàndard que s'adapta en temps real a la qualitat de la connexió a Internet.
-* Vídeo (VP8 / H.264): Garanteixen retards gairebé nuls (mil·lisegons) per a una conversa fluida.
 
 ![Imagen 176](images/image_176.png)
 
@@ -1432,7 +1394,7 @@ Ruta donde se guardara todo
 
 ![Imagen 181](images/image_181.png)
 
-Ahora iniciamos seccion
+Ahora iniciamos sesion
 
 ![Imagen 182](images/image_182.png)
 
@@ -1451,12 +1413,19 @@ ls para saber si esta, pasar el video a mp4 y dar permisos en la carpeta
 
 ![Imagen 186](images/image_186.png)
 
-http://34.205.94.36:8096
-Permitir que confien en mi ip
+## Funcion del server de video
 
-![Imagen 187](images/image_187.png)
+El servei s'implementa sota el model de Vídeo sota Demanda (VoD - Video on Demand), on els usuaris poden reproduir els continguts allotjats al servidor en qualsevol moment. Per garantir una reproducció fluida sense necessitat de descarregar el fitxer complet prèviament, s'utilitza el protocol de streaming HLS (HTTP Live Streaming):
 
-Video conferencia
+Trocejament del contingut: El servidor agafa el fitxer de vídeo original (en format MP4 codificat amb el còdec H.264) i el divideix en petits fragments de pocs segons (fitxers .ts).
+Índex de reproducció: Es genera un fitxer d'índex o llista de reproducció (extensió .m3u8) que indica al client l'ordre d'aquests fragments.
+Transmissió via HTTP: El client (navegador web Firefox) va sol·licitant i descarregant aquests fragments de forma seqüencial a través del port web estàndard (8096 en Jellyfin). Això evita bloquejos de tallafocs i permet la reproducció instantània. Per a la nostra corporació, aquest servei és una eina clau per a:
+Formació corporativa: Allotjar cursos, seminaris tècnics i videotutorials per als nous empleats, centralitzant el coneixement de l'empresa.
+Comunicació interna: Distribuir comunicats oficials de la direcció, presentacions de resultats o esdeveniments corporatius a tota la plantilla de forma unificada.
+Estalvi de recursos: En reproduir per streaming, s'evita la saturació d'emmagatzematge als equips locals dels treballadors. 
+
+
+## Video conferencia
 Desplegar la Videoconferencia (Jitsi + Nginx)
 
 ![Imagen 188](images/image_188.png)
@@ -1471,6 +1440,9 @@ Crear la interfaz web de la videoconferencia
 
 ![Imagen 191](images/image_191.png)
 
+Permitir que confien en mi ip: http://34.205.94.36:8096
+
+![Imagen 187](images/image_187.png)
 
 ![Imagen 192](images/image_192.png)
 
@@ -1479,11 +1451,23 @@ Iniciamos streaming
 ![Imagen 193](images/image_193.png)
 
 http://34.205.94.36
-Audio
 
-![Imagen 194](images/image_194.png)
+## Protocolo WebRTC
 
-Apartado final Velocidad , los bits y la tasa de bits (bitrate)
+Descripció de protocols de videoconferència (WebRTC) Tecnologia de codi obert que permet la comunicació d'àudio, vídeo i dades en temps real directament entre navegadors i mòbils.
+
+Sense connectors (plugins): Funciona de manera nativa mitjançant les APIs dels navegadors moderns (Firefox, Chrome), sense necessitat d'instal·lar cap programari addicional.
+Canals segurs P2P (Peer-to-Peer)
+Connexió directa: El flux de dades viatja directament d'un usuari a un altre sense passar pel servidor central d'AWS, reduint dràsticament la càrrega de la infraestructura.
+Seguretat obligatòria: Totes les transmissions estan xifrades de extrem a extrem mitjançant els protocols DTLS i SRTP, garantint la confidencialitat.
+Còdecs d'alta eficiència
+Optimitzen la qualitat i redueixen el consum d'amplada de banda amb baixa latència:
+
+Àudio (Opus): Estàndard que s'adapta en temps real a la qualitat de la connexió a Internet.
+Vídeo (VP8 / H.264): Garanteixen retards gairebé nuls (mil·lisegons) per a una conversa fluida.
+
+
+## Apartado final Velocidad , los bits y la tasa de bits (bitrate)
 En la Radio (Icecast + FFmpeg)
 
 ![Imagen 195](images/image_195.png)
@@ -1501,10 +1485,10 @@ Segunda prueba poniendo todo en marcha
 
 ![Imagen 197](images/image_197.png)
 
-Velocitat de baixada (Download): 1493.09 Mbit/s
-Velocitat de pujada (Upload): 1834.20 Mbit/s
+Velocidad de bajada (Download): 1493.09 Mbit/s
+Velocitat de subida (Upload): 1834.20 Mbit/s
 Latència (Ping): 2.425 ms
-Anàlisi del Comportament i Consum dels Serveis Multimèdia
+Anàlisis del Comportamiento i Consumo del servicio Multimèdia
 
 ### Análisis de consumo con múltiples servicios activos
 
