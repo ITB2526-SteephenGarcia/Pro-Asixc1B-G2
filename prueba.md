@@ -850,7 +850,7 @@ Se autetifica mediante ldap o no entras
 
 ![Imagen 44](images/image_44.png)
 
-Resumen de los serves alojados en la web
+Resumen de los servers alojados en la web
 
 ![Imagen 45](images/image_45.png)
 
@@ -862,15 +862,15 @@ Server de BBDD con MariaDB
 
 ![Imagen 47](images/image_47.png)
 
-Server de monitoritzacion con Zabbix
+Server de monitorizacion con Zabbix
 
 ![Imagen 48](images/image_48.png)
 
-Resumen de nustros Racks
+Resumen de nuestros Racks
 
 ![Imagen 49](images/image_49.png)
 
-Coneccion con filezilla para administrar SFTP
+Conexión con filezilla para administrar SFTP
 
 ![Imagen 50](images/image_50.png)
 
@@ -880,7 +880,7 @@ Coneccion con filezilla para administrar SFTP
 
 ![Imagen 52](images/image_52.png)
 
-Demostracion de clonozilla del sftp
+Demostración de clonozilla del sftp
 
 ![Imagen 53](images/image_53.png)
 
@@ -888,7 +888,7 @@ Hacer que el sftp se verifique mediante Ldap
 
 ![Imagen 54](images/image_54.png)
 
-Se pone la ip privada del server ldap: ldap:
+Se pone la ip privada del server ldap: ldap://172.31.16.181
 
 ![Imagen 55](images/image_55.png)
 
@@ -896,7 +896,7 @@ Se pone el dominio del ldap de mi compañero: dc=innovatetech,dc=local
 
 ![Imagen 56](images/image_56.png)
 
-Version a la que se configura: 3
+Versión a la que se configura: 3
 
 ![Imagen 57](images/image_57.png)
 
@@ -925,6 +925,7 @@ Carpeta utilizada y restart del server
 ![Imagen 64](images/image_64.png)
 
 Comprobación de la conexión con ldap
+
 nc -zv 172.31.16.181 389: Comprueba la conectividad por red con el servidor LDAP del mi compañero. El mensaje succeeded! confirma que el puerto 389 (LDAP) está abierto y tu máquina se comunica con la suya sin bloqueos.
 
 ![Imagen 65](images/image_65.png)
@@ -940,8 +941,10 @@ ldapserach hacia la ip privada de mi compañero y el usuario clienteweb que creo
 
 ![Imagen 68](images/image_68.png)
 
-Conexion Server web + Sftp con BBDD
+#### Conexion Server web + Sftp con BBDD
+
 Mi compañero que administra aws debe de activar el puerto de la base de datos 3306 TCP que pertenece a mariadb. Luego mi compañero cambia la carpeta sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf y poner:
+
 bind-address = 0.0.0.0
 
 ![Imagen 69](images/image_69.png)
@@ -950,7 +953,8 @@ Con esto el server Web + Sftp tiene conexión con los demás servers. Resumen:
 
 ![Imagen 70](images/image_70.png)
 
-Hacer segura el Server web + Sftp
+#### Hacer segura el Server web + Sftp
+
 Prohíbe por completo que el usuario root pueda iniciar sesión directamente desde fuera por SSH.
 
 ![Imagen 71](images/image_71.png)
