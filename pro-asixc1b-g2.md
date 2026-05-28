@@ -1185,6 +1185,9 @@ Permisos obligatorios para que no se queden en 0 segundos
 
 ![Imagen 165](images/image_165.png)
 
+Configuración radio.html
+<img width="1405" height="941" alt="Captura de pantalla 2026-05-28 193643" src="https://github.com/user-attachments/assets/2521b7b5-92da-4775-be58-0be5b223be48" />
+
 comando final para el arranque
 
 ![Imagen 166](images/image_166.png)
