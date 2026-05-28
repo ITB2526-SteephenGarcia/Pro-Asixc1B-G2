@@ -1,4 +1,5 @@
-## Propsta de CPD 
+# Parte de fonaments del maquinari
+## Proposta de CPD 
 
 
 ## 1. Ubicacion física
@@ -50,8 +51,9 @@ Justificación de los parámetros:
 * 21°C es el punto óptimo para los servidores: suficientemente frío para evitar sobrecalentamiento pero no tan bajo que aumente innecesariamente el consumo energético.
 * El 50% de humedad evita tanto la electricidad estática (humedad baja) como la condensación en los componentes (humedad alta).
 * Los filtros HEPA H13 retienen el 99,95% de partículas ≥ 0,3 μm, protegiendo los componentes electrónicos del polvo.
+
 Monitorización continua: sensores de temperatura y humedad en la entrada y salida de cada rack, conectados al sistema de monitorización central (Zabbix)
-1.3 Medidas para dificultar la identificación de la sala:
+### 1.3 Medidas para dificultar la identificación de la sala:
 * La puerta de acceso al CPD no tiene rótulo ni indicación visible. Exteriormente se identifica como "Sala Técnica ST-01" sin más detalles.
 * No hay ventanas ni aperturas hacia el exterior.
 * El ruido de los equipos de climatización queda aislado acústicamente mediante placas de material absorbente en las paredes, evitando que se perciba desde el pasillo.
@@ -61,13 +63,14 @@ Monitorización continua: sensores de temperatura y humedad en la entrada y sali
 ### 1.4 Distribución y gestión del cableado
 
 Principios de gestión del cableado:
-* Todo el cableado va etiquetado en ambos extremos con identificadores únicos (ej: SW1-P01-SRV1).
+
+* Todo el cableado va etiquetado en ambos extremos con identificadores únicos (ej: `SW1-P01-SRV1`).
 * Se utilizan colores estandarizados por tipo de cable:
-* Azul: red de datos (LAN)
-* Amarillo: conexiones de gestión (IPMI/iDRAC)
-* Rojo: alimentación eléctrica de los racks (PDU)
-* Negro: alimentación de los SAIs
-* Verde: fibra óptica (uplinks entre switches)
+  * **Azul:** red de datos (LAN)
+  * **Amarillo:** conexiones de gestión (IPMI/iDRAC)
+  * **Rojo:** alimentación eléctrica de los racks (PDU)
+  * **Negro:** alimentación de los SAIs
+  * **Verde:** fibra óptica (uplinks entre switches)
 * El cableado de datos y el de alimentación eléctrica nunca se cruzan ni van juntos en el mismo canal, para evitar interferencias electromagnéticas.
 * Dentro de los racks se utilizan organizadores de cable horizontales (1U entre cada patch panel) y pasacables verticales en los laterales del rack.
 * Todo el cableado horizontal (entre racks y equipos) va por debajo del suelo técnico en canales de PVC cerrados.
@@ -81,16 +84,17 @@ Suelo técnico:
 * Se instala un suelo técnico elevado de 30 cm sobre el suelo estructural del edificio.
 * Las placas son de 60 × 60 cm, de acero galvanizado con acabado antideslizante, con una capacidad de carga de 1.200 kg/m².
 * Por debajo del suelo técnico circulan:
-* Cableado de red (cat.6A y fibra óptica)
-* Cableado de alimentación eléctrica
-* Conductos de impulsión de aire frío de los equipos de climatización (salidas de rejilla frente a cada rack)
+  * Cableado de red (cat.6A y fibra óptica)
+  * Cableado de alimentación eléctrica
+  * Conductos de impulsión de aire frío de los equipos de climatización (salidas de rejilla frente a cada rack)
 Techo técnico:
 * Se instala un techo técnico a 2,7 m de altura (dejando 30 cm libres hasta el techo estructural de 3 m).
 * Por encima del techo técnico circulan:
-* Conductos de retorno de aire caliente hacia los equipos de climatización
-* Cableado de seguridad (cámaras, sensores de incendio)
-* Iluminación LED de la sala (6 paneles de 60W cada uno)
-1.6 Estructuras y planos
+  * Conductos de retorno de aire caliente hacia los equipos de climatización
+  * Cableado de seguridad (cámaras, sensores de incendio)
+  * Iluminación LED de la sala (6 paneles de 60W cada uno)
+
+### 1.6 Estructuras y planos
 Boceto del sotano:
 
 ![Imagen 1](images/image_1.png)
@@ -99,7 +103,7 @@ Imagen Generada de como lo queremos:
 
 ![Imagen 2](images/image_2.png)
 
-2. Infraestructura IT
+# 2. Infraestructura IT
 
 ### 2.1 Servidores
 
@@ -167,6 +171,7 @@ Se instalan 2 racks de 24U (APC NetShelter SX 24U), situados en paralelo siguien
 El CPD dispone de dos circuitos eléctricos independientes procedentes de dos cuadros eléctricos diferenciados del edificio:
 * Circuito A: alimenta PDU-A de cada rack (fuente de alimentación 1 de cada servidor).
 * Circuito B: alimenta PDU-B de cada rack (fuente de alimentación 2 de cada servidor).
+
 Todos los servidores elegidos disponen de fuentes de alimentación redundantes (dual PSU), de modo que si un circuito cae, el servidor continúa funcionando por el circuito restante sin interrupción.
 
 ![Imagen 4](images/image_4.png)
@@ -196,9 +201,13 @@ SAI escollit: 2× APC Smart-UPS SRT 3000VA / 2700W
 * Capacidad por SAI: 2.700 W
 * Cada SAI se encarga de un circuito (A o B).
 * Cada servidor tiene una PSU conectada a cada SAI, de modo que ambos SAIs soportan la mitad de la carga total.0
-Cálculo de autonomía:
+  
+#### Cálculo de autonomía:
+
 Con el 48% de la carga por SAI (≈ 1.288 W) y las baterías del APC SRT3000:
+
 * Autonomía estimada: 20-24 minutos con carga al 48%.
+  
 Este tiempo es suficiente para:
 1. Que el generador del edificio (si existe) arranque.
 1. Que el personal técnico inicie un apagado ordenado de los servidores vía scripts automatizados (el SAI notifica por SNMP).
@@ -208,6 +217,8 @@ Este tiempo es suficiente para:
 
 
 ### 4.1 Seguridad física
+
+#### control de acceso
 
 El CPD implementa un sistema de tres factores de autenticación por capas:
 
@@ -222,8 +233,10 @@ El CPD implementa un sistema de tres factores de autenticación por capas:
 * El sistema registra fecha, hora e identidad de cada acceso e intento de acceso fallido.
 * Fuera del horario laboral (20h – 8h), se activa un nivel de alerta adicional: cualquier acceso genera una notificación inmediata al responsable de seguridad.
 * La lista de personas autorizadas se revisa trimestralmente.
-Se instalan 4 cámaras IP de seguridad (Axis P3245-V):
 
+#### Videovigilancia
+
+Se instalan 4 cámaras IP de seguridad (Axis P3245-V):
 
 | Cámara | Posición | Cobertura |
 | --- | --- | --- |
@@ -236,44 +249,54 @@ Se instalan 4 cámaras IP de seguridad (Axis P3245-V):
 * Grabación continua 24/7 en resolución 1080p.
 * Retención de 30 días en un NAS situado en el Rack 2 (SRV-06).
 * Las cámaras funcionan en una red aislada (VLAN de seguridad), separada de la red de datos.
-Detección:
+#### Sistemas de prevención, detección y extinción de incendios 
+#### Detección:
 * Detectores de humo ópticos (Siemens FDO221) en cada rincón de la sala y dentro de cada rack: total 6 detectores.
 * Detectores de calor (activación por temperatura > 57°C) en el techo técnico: 2 detectores.
 * Sistema conectado a la central de alarmas del edificio con aviso automático a los bomberos.
-Extinción:
+  
+#### Extinción:
 * Sistema de extinción por gas Novec 1230 (FK-5-1-12): no conductor, no corrosivo, no daña los equipos electrónicos y es seguro para las personas.
 * No se utilizan sistemas de extinción por agua (sprinklers) para evitar daños irreversibles en los equipos.
 * El gas se almacena en 2 cilindros situados en el exterior de la sala (pasillo), con tuberías hasta los difusores interiores.
 * Antes de la activación del gas: señal acústica de 30 segundos para permitir la evacuación del personal.
-Vías de evacuación:
+
+#### Vías de evacuación:
 * La sala dispone de una única puerta de acceso, que es a la vez la vía de evacuación (se abre siempre hacia fuera en caso de emergencia, sin necesidad de código).
 * Señalización luminosa de emergencia autónoma (batería propia) sobre la puerta.
 * Plano de evacuación plastificado pegado en la pared interior, visible desde cualquier punto de la sala.
-Planells:
+
+#### Planells:
 Elementos de seguridad CPD                                            Planol evacuacion
 
 ![Imagen 5](images/image_5.png)
 
-4.2 Seguridad lógica
-Restricción de acceso por autorización
+### 4.2 Seguridad lógica
+#### Restricción de acceso por autorización
 * Todos los servidores se acceden exclusivamente por SSH con clave pública/privada (sin contraseña).
 * Se crea un usuario de administración específico (admin_innovate) en cada servidor. El usuario root tiene el acceso SSH deshabilitado.
 * El fichero /etc/ssh/sshd_config configura: PermitRootLogin no, PasswordAuthentication no, MaxAuthTries 3.
 * Acceso a las aplicaciones web y bases de datos gestionado por roles diferenciados (admin, ventas, administración, trabajador).
-Firewalls
+  
+#### Firewalls
 * Firewall perimetral: pfSense instalado en una máquina dedicada (o como VM en el SRV-06), protegiendo el CPD del acceso no autorizado desde la red de la empresa e Internet.
 * Reglas básicas: whitelist por defecto (todo bloqueado excepto lo que se abre explícitamente).
 * Firewall de host (ufw / iptables) activado en cada servidor, permitiendo únicamente los puertos necesarios para cada servicio.
-* Puertos abiertos por defecto en cada servidor: únicamente SSH (22) y el puerto de 
-Monitorización
+* Puertos abiertos por defecto en cada servidor: únicamente SSH (22)
+  
+#### Monitorización
+
 Zabbix instalado en el SRV-06 para monitorizar:
+
 * Uso de CPU, RAM y disco de todos los servidores.
 * Temperatura de los servidores (vía SNMP/iDRAC).
 * Estado de los servicios (web, LDAP, logs, BD,streaming).
 * Nivel de carga de los SAIs (vía NUT - Network UPS Tools).
 * Alertas por correo electrónico automáticas si algún servicio cae o si la temperatura supera los 25°C.
-Copias de seguridad / Backups
-Política de backups 3-2-1:
+  
+#### Copias de seguridad / Backups
+### Política de backups 3-2-1:
+
 * 3 copias de los datos.
 * En 2 soportes diferentes (disco local + NAS).
 * 1 copia fuera del CPD (copia en la nube AWS S3).
