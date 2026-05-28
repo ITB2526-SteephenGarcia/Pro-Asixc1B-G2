@@ -982,6 +982,8 @@ El archivo configura el Zabbix Agent para recopilar métricas de rendimiento com
 
 ![Imagen 77](images/image_77.png)
 
+# Parte De Base de Datos
+
 # Server BBDD
 
 Creación de la base de datos con mysql (mariadb):
@@ -1226,7 +1228,9 @@ Server=172.31.15.83 ServerActive=172.31.15.83 Hostname=SRV-LOGS
 
 ![Imagen 139](images/image_139.png)
 
-# Server audio,vídeo y streaming
+# Parte De Serveis de Xarxa
+
+## Server audio,vídeo y streaming
 PubkeyAuthentication yes: Activé esta directiva para permitir que los usuarios puedan iniciar sesión de forma segura utilizando llaves públicas SSH.
 PasswordAuthentication no: Desactivé el acceso por contraseña tradicional para blindar mi servidor contra ataques de fuerza bruta, obligando a usar únicamente llaves criptográficas.
 PermitRootLogin no: Prohibí el inicio de sesión directo al usuario administrador (root) por motivos de seguridad, forzando a entrar primero con un usuario normal.
