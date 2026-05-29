@@ -1372,6 +1372,8 @@ Aunque el rendimiento actual roza la perfección, propongo estas tres mejoras pa
 
 # Server BBDD
 
+<img width="603" height="442" alt="image" src="https://github.com/user-attachments/assets/a5b2e2ed-139d-4f49-ba32-f5e12994e657" />
+
 Creación de la base de datos con mysql (mariadb):
 Instalaremos los paquetes necesarios para poder utilizar mariadb en el servidor:
 
