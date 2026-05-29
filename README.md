@@ -122,3 +122,6 @@ Se ha diseñado un script en Bash programado en el **Cron** del sistema (ejecuci
 
 ---
 _Proyecto desarrollado como propuesta integral de Fundamentos de Hardware y Servicios en Red - 2026._
+
+[Ir al proyecto COMPLETO](pro-asixc1b-g2.md)
+
